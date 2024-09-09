@@ -1,0 +1,82 @@
+-- Christine Lee
+-- Part 1: 
+-- World Database Questions: 
+-- Easy Questions
+select Name from country where Continent = "South America";
+select sum(Population) from country where Name = "Germany";
+select Name from city where CountryCode = "JPN";
+-- Medium Questions
+select Name, Population from country where region = 'Central Africa'
+order by Population DESC 
+limit 3; 
+select Name, LifeExpectancy from country where Population > 1000000 < 5000000;
+select country.name from country
+join countrylanguage on country.code = countrylanguage.CountryCode
+where countrylanguage.Language = "French" and countrylanguage.IsOfficial = "T";
+-- Chinook Database Questions: 
+-- Easy Questions
+select Title from Album where ArtistId = 1;
+select FirstName, LastName, Email from Customer where Country = 'Brazil';
+select Name from Playlist;
+-- Medium Questions
+select Name from Track where GenreId = 1;
+select FirstName, LastName from Employee where ReportsTo = 2;
+select CustomerId, sum(total) as total_sales
+from Invoice
+group by CustomerId
+
+--Part 2:
+create table movies(
+    title VARCHAR(300),
+    year VARCHAR(100),
+    director varchar(200),
+    genre varchar(20),
+    rating varchar(100)
+);
+create table showtimes(
+    title VARCHAR(300),
+    date date,
+    time time,
+    theater INT
+);
+create table prices(
+    title varchar(300),
+    adult decimal(10,2),
+    child decimal (10,2),
+    senior decimal (10,2)
+);
+
+insert into movies (title, year, director, genre, rating)
+VALUES
+('Beetlejuice Beetlejuice', '2024', 'Tim Burton', 'comedy', 'PG-13'),
+('The Front Room', '2024', 'Max Eggers', 'horror', 'R'),
+('Afraid', '2024', 'Chris Weitz', 'horror', 'PG-13'),
+('Blink Twice', '2024', 'Zoë Kravitz', 'thriller', 'R'),
+('The Forge', '2024', 'Alex Kendrick', 'drama', 'PG');
+
+insert into showtimes (title, date, time, theater)
+VALUES
+('Beetlejuice Beetlejuice', '2024-09-08', '10:00', 1),
+('The Front Room', '2024-09-08', '10:15', 2),
+('Afraid', '2024-09-08', '9:00', 3),
+('Blink Twice', '2024-09-08', '6:45', 4),
+('The Forge', '2024-09-08', '4:30', 5);
+
+insert into prices(title, adult, child, senior)
+VALUES
+('Beetlejuice Beetlejuice', 14.00, 12.00, 12.00),
+('The Front Room', 14.00, 12.00, 12.00),
+('Afraid', 14.00, 12.00, 12.00),
+('Blink Twice', 14.00, 12.00, 12.00),
+('The Forge', 14.00, 12.00, 12.00);
+
+-- Query to find movies playing directed by Tim Burton
+select title from movies where director = 'Tim Burton';
+
+-- Query to find price for adult for Blink Twice
+select adult from prices where title = 'Blink Twice';
+
+-- Query to find horror movies playing
+select title from movies where genre = 'horror';
+    
+
